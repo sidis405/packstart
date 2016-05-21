@@ -12,23 +12,28 @@ var path = require('path');
 var webpack = require('webpack');
 
 //create plugin with common code
-var commonsPlugin = new webpack.optimize.CommonsChunkPlugin('shared.js'):
+var commonsPlugin = new webpack.optimize.CommonsChunkPlugin('shared.js');
 
 module.exports = {
 	//Resolve path context for js files
 	context: path.resolve('js'),
 	//Define entty points. File extensions are resolve in the
 	// 'resolve' section
-	entry: ['./utils', './app'],
+	entry: {
+		about: './about_page.js',
+		contact: './contact_page.js',
+		home: './home_page.js'
+	},
 	output: {
 		//where to output the bundle
 		path: path.resolve('build/js'),
 		//where to serve it from to the http server
 		publicPath: '/public/assets/js/',
-		//filename
-		filename: 'bundle.js'
+		//filename varying on entry point
+		filename: '[name].js'
 	},
 
+	//plugins here
 	plugins: [commonsPlugin],
 	devServer: {
 		//rewrite the base of urls for public content
@@ -53,9 +58,23 @@ module.exports = {
 				test: /\.es6$/,
 				exclude: 'node_modules',
 				loader: "babel-loader"
+			},
+			{
+				// CSS support
+				test: /\.css$/,
+				exclude: 'node_modules',
+				//Pipe css first through css and then style
+				//chain as many as needed
+				loader: "style-loader!css-loader"
+			},
+			{
+				// SASS support
+				test: /\.scss$/,
+				exclude: 'node_modules',
+				loader: "style-loader!css-loader!sass-loader"
 			}
 		]
-	},
+	}, 
 
 	resolve: {
 		//extenstions to outomatically resolve
