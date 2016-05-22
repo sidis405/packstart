@@ -1,3 +1,20 @@
+@font-face {
+    font-family: 'Lato';
+
+    /*These get loaded from the url loader*/
+
+    src: url('../fonts/Lato-Regular.ttf');
+    src: url('../fonts/Lato-Italic.ttf');
+    src: url('../fonts/Lato-Bold.ttf');
+    src: url('../fonts/Lato-BoldItalic.ttf');
+}
+
+body {
+    font-family: 'Lato, Helvetica, Arial';
+    padding-top: 80px;
+}
+
+
 #bg_header_img {
     background: url('../images/webpack_logo.png') -131px 1px no-repeat;
     margin-right: 15px;
@@ -8,3 +25,4 @@
 h3 {
     font-size: 18px;
 }
+

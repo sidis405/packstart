@@ -1,7 +1,7 @@
 {
   "name": "PackStart",
   "version": "0.0.1",
-  "description": "Staring point for webpack",
+  "description": "Starting point for webpack",
   "repository": "https://github.com/sidis405/packstart",
   "main": "app.js",
   "scripts": {
@@ -9,7 +9,7 @@
     "prod": "webpack --config webpack-production.config.js -p"
   },
   "keywords": [],
-  "author": "",
+  "author": "Sidrit Trandafili",
   "license": "ISC",
   "devDependencies": {
     "autoprefixer-loader": "^3.2.0",

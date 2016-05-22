@@ -6,9 +6,9 @@ console.log('this is the home page scripts');
 img.style.width = "25%";
 img.src = require('../images/webpack_logo.png');
 
-document.getElementById('img_container').append(img);
+document.getElementById('img_container').appendChild(img);
 
-//require('../css/bootstrap.css');
+require('../css/bootstrap.css');
 require('../css/app.scss');
 require('../css/app.less');
 require('../css/app.css');
