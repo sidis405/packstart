@@ -21,4 +21,5 @@ var stripLoader = {
 //add strippeer to the loaders for the build
 devConfig.module.loaders.push(stripLoader);
 
+
 module.exports = devConfig;

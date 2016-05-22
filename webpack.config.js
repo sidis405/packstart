@@ -31,9 +31,9 @@ module.exports = {
 	},
 	output: {
 		//where to output the bundle
-		path: path.resolve('build/'),
+		path: path.resolve('public/assets/'),
 		//where to serve it from to the http server
-		publicPath: '/public/assets/',
+		publicPath: '/assets/',
 		//filename varying on entry point
 		filename: '[name].js'
 	},
