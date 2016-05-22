@@ -11,6 +11,11 @@ var path = require('path');
 //yes. webpack.
 var webpack = require('webpack');
 
+//Require this to pluck out the css out of the js bundle file
+//-UNCOMMENT TO USE THIS
+//var ExtractTextPlugin = require('extract-text-webpack-plugin');
+//var extractCss = new ExtractTextPlugin("styles.css");
+
 //create plugin with common code
 var commonsPlugin = new webpack.optimize.CommonsChunkPlugin('shared.js');
 
@@ -26,15 +31,18 @@ module.exports = {
 	},
 	output: {
 		//where to output the bundle
-		path: path.resolve('build/js'),
+		path: path.resolve('build/'),
 		//where to serve it from to the http server
-		publicPath: '/public/assets/js/',
+		publicPath: '/public/assets/',
 		//filename varying on entry point
 		filename: '[name].js'
 	},
 
 	//plugins here
+	//plugins: [commonsPlugin, extractCss],
 	plugins: [commonsPlugin],
+
+
 	devServer: {
 		//rewrite the base of urls for public content
 		contentBase: 'public'
@@ -63,15 +71,28 @@ module.exports = {
 				// CSS support
 				test: /\.css$/,
 				exclude: 'node_modules',
-				//Pipe css first through css and then style
-				//chain as many as needed
-				loader: "style-loader!css-loader"
+				//Pipe css first through style to place in the header and then css
+				//chain as many as needed on the second param
+				//UNCOMENT TO USE TEXT EXTACTION
+				//loader: ExtractTextPlugin.extract("style-loader" , "css-loader!autoprefixer-loader")
+				loader: "style-loader!css-loader!autoprefixer-loader"
 			},
 			{
 				// SASS support
 				test: /\.scss$/,
 				exclude: 'node_modules',
-				loader: "style-loader!css-loader!sass-loader"
+				loader: "style-loader!css-loader!autoprefixer-loader!sass-loader"
+			},
+			{
+				// LEss support
+				test: /\.less$/,
+				exclude: 'node_modules',
+				loader: "style-loader!css-loader!autoprefixer-loader!less-loader"
+			},
+			{
+				test: /\.(png|jpg)$/, 
+				exclude: /node_modules/,
+				loader: 'url-loader?limit=100000'
 			}
 		]
 	}, 
