@@ -14,7 +14,7 @@ var webpack = require('webpack');
 //Require this to pluck out the css out of the js bundle file
 //-UNCOMMENT TO USE THIS - DO this to prevent the flash of unstyled markup
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var extractCss = new ExtractTextPlugin("assets/styles.css");
+var extractCss = new ExtractTextPlugin("styles.css");
 
 //create plugin with common code
 var commonsPlugin = new webpack.optimize.CommonsChunkPlugin('shared.js');
@@ -76,20 +76,22 @@ module.exports = {
 				//Pipe css first through style to place in the header and then css
 				//chain as many as needed on the second param
 				//UNCOMENT TO USE TEXT EXTACTION
-				//loader: ExtractTextPlugin.extract("style-loader" , "css-loader!autoprefixer-loader")
-				loader: "style-loader!css-loader!autoprefixer-loader"
+				loader: ExtractTextPlugin.extract("style-loader" , "css-loader!autoprefixer-loader")
+				// loader: "style-loader!css-loader!autoprefixer-loader"
 			},
 			{
 				// SASS support
 				test: /\.scss$/,
 				exclude: 'node_modules',
-				loader: "style-loader!css-loader!autoprefixer-loader!sass-loader"
+				loader: ExtractTextPlugin.extract("style-loader" , "css-loader!autoprefixer-loader!sass-loader")
+				// loader: "style-loader!css-loader!autoprefixer-loader!sass-loader"
 			},
 			{
 				// LEss support
 				test: /\.less$/,
 				exclude: 'node_modules',
-				loader: "style-loader!css-loader!autoprefixer-loader!less-loader"
+				loader: ExtractTextPlugin.extract("style-loader" , "css-loader!autoprefixer-loader!less-loader")
+				// loader: "style-loader!css-loader!autoprefixer-loader!less-loader"
 			},
 			// Images and Font support
 			{
